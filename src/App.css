@@ -1,0 +1,36 @@
+.App{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img{
+  cursor: pointer;
+}
+.headerWrapper{
+  display: flex;
+  justify-content: center;
+}
+.container{
+  display: flex;
+  justify-content: center;
+  width: 85%;
+}
+.donat{
+  width: 88%;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+
+@media (max-width:770px){
+  .container{
+      width: 100%;
+  }
+  img{
+    width: 50%;
+  }
+}
