@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Menu, Button, MenuItem } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import { Consumer } from '../useColorTheme'
+import corona from '../images/coronaaa.png'
 
 function Menuu() {
+    const { theme } = useContext(Consumer)
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
@@ -16,8 +19,8 @@ function Menuu() {
 
     return (
         <>
-            <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                Open Menu
+            <Button id={`${theme === 'dark' ? 'darkForm' : ''}`} aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                <img src={corona} style={{ width: '50px' }} alt='cvd19' />
             </Button>
             <Menu
                 id="simple-menu"

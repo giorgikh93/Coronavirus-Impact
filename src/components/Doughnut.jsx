@@ -17,7 +17,7 @@ function Donat(props) {
                     'Daily Confirmed',
                     'Daily Recovered',
                     'Daily Deaths'
-                ]
+                ],
             }} />
         </motion.div>
     )
