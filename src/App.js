@@ -10,7 +10,6 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import { Switch as Darkmode } from '@material-ui/core'
 import { Consumer } from './useColorTheme'
-
 import coronaImg from './images/corona.png'
 
 function App() {
@@ -53,19 +52,23 @@ function App() {
   if (!data) {
     error()
   }
-
-
+  theme === 'dark' ? document.getElementById('root').classList.add('dark') : document.getElementById('root').classList.remove('dark');
   return (
     !data ? <h1 style={{ width: '100%', textAlign: 'center', marginTop: '200px', fontSize: '50px' }}>{loading}</h1> :
-      <div className={`App ${theme === 'dark' ? 'dark' : ''}`} >
+      <div className={`App `} >
         <div className='darkMode'>
-        <span id={theme === 'dark' ? 'darkForm' : ''}>Change Mode</span>  <Darkmode onChange={changeColorTheme} color='primary' />
+          <span id={theme === 'dark' ? 'darkForm' : ''}>Change Mode</span>  <Darkmode onChange={changeColorTheme} color='primary' />
         </div>
         <img src={coronaImg} alt='corona' onClick={handleRedirect} />
+     
+
         <div className='headerWrapper'>
-          <Form handleCountryChange={handleCountryChange} countries={countries} />
-          <Menuu data={data} />
+            <Form handleCountryChange={handleCountryChange} countries={countries} />
+            <Menuu data={data} />
         </div>
+
+
+
         <AnimatePresence>
           <Switch>
             <Route exact path='/'>

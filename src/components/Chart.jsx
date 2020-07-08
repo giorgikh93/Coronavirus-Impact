@@ -1,13 +1,20 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2'
 import {motion} from 'framer-motion'
+import CustomHook from '../CustomHook'
+import Cards from './Cards'
 
 function Chart(props) {
+
+    const {data} = CustomHook({ confirmed:props.country[props.country.length-1].Confirmed, recovered:props.country[props.country.length-1].Recovered, deaths:props.country[props.country.length-1].Deaths})
+    console.log(props.country)
+    console.log(data)
     return (
         props.country ?
         <motion.div  initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className='container'>
+            <Cards data={data}/>
           <Line data={{
-                labels: props.country.map(data => data.Date),
+                labels: props.country.map(data => data.Date.slice(0, 10)),
                 datasets: [{
                     data: props.country.map(data => data.Confirmed),
                     label: 'confirmed',

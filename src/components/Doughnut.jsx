@@ -1,10 +1,15 @@
 import React from 'react'
 import { Doughnut } from 'react-chartjs-2'
 import {motion} from 'framer-motion'
+import Cards from './Cards'
+import CustomHook from '../CustomHook'
+
 
 function Donat(props) {
+    const {data} = CustomHook({ confirmed:props.data.NewConfirmed, recovered:props.data.NewRecovered, deaths:props.data.NewDeaths})
     return (
         <motion.div initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className='donat'>
+        <Cards data={data}/>
             <Doughnut  data={{
                 datasets: [{
                     data: [props.data.NewConfirmed, props.data.NewRecovered, props.data.NewDeaths],

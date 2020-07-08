@@ -55,14 +55,13 @@ table {
   padding: 0;
   margin: 0;
   height: 100%;
-  background-color: #f3f3f3;
   position: relative;
 
 }
-body{
-  box-sizing: border-box;
+html,body{
   height: 100%;
-
+  box-sizing: border-box;
+  background-color: #f3f3f3;
 }
 *{
   box-sizing: border-box;
@@ -73,7 +72,9 @@ body{
 #darkForm{
   color: #36d4c1;
 }
-
+.cards{
+  padding-bottom: 50px;
+}
 img{
   cursor: pointer;
 }
@@ -81,10 +82,15 @@ img{
   display: flex;
   justify-content: center;
 }
+.searchWrapper{
+  display: flex;
+  justify-content: center;
+}
 .container{
   display: flex;
   justify-content: center;
   width: 85%;
+  flex-direction: column;
 }
 .donat{
   width: 88%;
@@ -101,7 +107,18 @@ a{
   justify-content: flex-end;
   align-items: center;
 }
-
+.infected{
+  border: 3px solid rgba(0, 0, 255, 0.5)
+}
+.recovered{
+  border: 3px solid rgba(0, 255, 0, 0.5);
+}
+.deaths{
+  border: 3px solid rgba(255, 0, 0, 0.5)
+}
+ .MuiGrid-item {
+    margin: 12px !important;
+}
 @media (max-width:770px){
   .container{
       width: 100%;
