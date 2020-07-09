@@ -18,17 +18,20 @@ function App() {
   const [data, setData] = useState('')
   const [countries, setCountries] = useState([])
   const [countryInfo, setCountryInfo] = useState([])
+  const [individualCountry, setIndividualCountry] = useState('')
   const [loading, setLoading] = useState('Loading...')
 
   useEffect(() => {
     axios.get("https://api.covid19api.com/summary")
-      .then(res => setData(res.data.Global))
+      .then(res => setData(res.data))
   }, [])
+
 
   useEffect(() => {
     axios.get("https://api.covid19api.com/countries")
       .then(res => setCountries(res.data))
   }, [])
+
 
   function handleCountryChange(country) {
     if (country === 'Global') {
@@ -36,6 +39,8 @@ function App() {
     }
     axios.get(axios.get(`https://api.covid19api.com/total/country/${country}`)
       .then(res => setCountryInfo(res.data)))
+
+    setIndividualCountry(country)
   }
 
   function handleRedirect() {
@@ -52,7 +57,9 @@ function App() {
   if (!data) {
     error()
   }
+
   theme === 'dark' ? document.getElementById('root').classList.add('dark') : document.getElementById('root').classList.remove('dark');
+
   return (
     !data ? <h1 style={{ width: '100%', textAlign: 'center', marginTop: '200px', fontSize: '50px' }}>{loading}</h1> :
       <div className={`App `} >
@@ -60,11 +67,11 @@ function App() {
           <span id={theme === 'dark' ? 'darkForm' : ''}>Change Mode</span>  <Darkmode onChange={changeColorTheme} color='primary' />
         </div>
         <img src={coronaImg} alt='corona' onClick={handleRedirect} />
-     
+
 
         <div className='headerWrapper'>
-            <Form handleCountryChange={handleCountryChange} countries={countries} />
-            <Menuu data={data} />
+          <Form handleCountryChange={handleCountryChange} countries={countries} />
+          <Menuu data={data} setCountryInfo={setCountryInfo} />
         </div>
 
 
@@ -73,7 +80,7 @@ function App() {
           <Switch>
             <Route exact path='/'>
               {countryInfo.length > 0 ? <Chart country={countryInfo.length > 0 ? countryInfo : ''} />
-                : <Donat data={data} />}
+                : <Donat data={data} country={individualCountry} />}
             </Route>
             <Route path='/chart'>
               <Chart country={countryInfo} />

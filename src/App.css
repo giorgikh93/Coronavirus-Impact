@@ -118,6 +118,11 @@ a{
 }
  .MuiGrid-item {
     margin: 12px !important;
+    background-color: inherit !important;
+}
+.darkImportant{
+  color: #36d4c1 !important;
+
 }
 @media (max-width:770px){
   .container{

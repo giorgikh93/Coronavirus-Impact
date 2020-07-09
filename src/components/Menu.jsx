@@ -1,19 +1,26 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef } from 'react'
 import { Menu, Button, MenuItem } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { Consumer } from '../useColorTheme'
 import corona from '../images/coronaaa.png'
 
-function Menuu() {
+function Menuu(props) {
     const { theme } = useContext(Consumer)
     const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const globalRef = useRef()
+
+
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleClose = () => {
+    const handleClose = (e) => {
         setAnchorEl(null);
+        // if(e.target.closest('A') === globalRef.current){
+            props.setCountryInfo([])
+        // }
 
     };
 
@@ -30,7 +37,7 @@ function Menuu() {
                 onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}><Link to='/'>Daily update</Link></MenuItem>
-                <MenuItem onClick={handleClose}><Link to='/global'>Global Numbers</Link></MenuItem>
+                <MenuItem  onClick={handleClose}><Link ref={globalRef} to='/global'>Global Numbers</Link></MenuItem>
             </Menu>
         </>
     )

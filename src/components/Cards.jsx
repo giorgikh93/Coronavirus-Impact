@@ -1,22 +1,49 @@
-import React, {useContext} from 'react'
+import React, { useContext, } from 'react'
 import { Card, CardContent, Typography, Grid } from '@material-ui/core'
 import CountUp from 'react-countup'
-import {Consumer} from '../useColorTheme'
-
-function Cards(props){
-    const {theme} = useContext(Consumer)
+import { Consumer } from '../useColorTheme'
+import axios from 'axios'
 
 
-  const {confirmed,recovered,deaths} = props.data
-    return(
+function Cards(props) {
+
+    const { theme } = useContext(Consumer)
+    // const [data, setData] = useState({})
+
+
+    const { confirmed, recovered, deaths } = props.data
+
+    // useEffect(() => {
+    //     axios.get("https://api.covid19api.com/summary")
+    //         .then(res => setData(res.data))
+    // }, [])
+    // const dat = data.Countries !== undefined ? data.Countries.find(country => country.Country === props.country) : ''
+
+
+
+    //   const { TotalConfirmed: confirmed, TotalRecovered: recovered, TotalDeaths: deaths } = dat
+
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+
+    today = mm + '-' + dd + '-' + yyyy;
+    return (
         <div className='cards'>
-    <Grid container spacing={3} justify='center'>
-                <Grid item component={Card} xs={12} md={3} className='infected'>
-                    <CardContent  >
-                        <Typography color='textSecondary' gutterBottom >
+            <Grid container spacing={3} justify='center'  >
+                <Grid item component={Card} xs={12} md={3} className='infected' >
+                    <CardContent className={theme === 'dark' ? 'darkImportant' : ''}>
+                        <Typography color='textSecondary' gutterBottom className={theme === 'dark' ? 'darkImportant' : ''}>
                             INFECTED
                         </Typography>
-                        <Typography variant='h5'>
+                        <Typography>
+                            <span>{new Date(today).toDateString()}</span>
+                        </Typography>
+
+                        <Typography variant='h5' >
+
                             <CountUp
                                 start={0}
                                 end={confirmed !== undefined ? confirmed : 0}
@@ -29,9 +56,12 @@ function Cards(props){
                     </CardContent>
                 </Grid>
                 <Grid item component={Card} xs={12} md={3} className='recovered'>
-                    <CardContent>
-                        <Typography color='textSecondary' gutterBottom >
+                    <CardContent className={theme === 'dark' ? 'darkImportant' : ''}>
+                        <Typography color='textSecondary' gutterBottom className={theme === 'dark' ? 'darkImportant' : ''}>
                             RECOVERED
+                        </Typography>
+                        <Typography>
+                            <span>{new Date(today).toDateString()}</span>
                         </Typography>
                         <Typography variant='h5'>
                             <CountUp
@@ -46,9 +76,12 @@ function Cards(props){
                     </CardContent>
                 </Grid>
                 <Grid item component={Card} xs={12} md={3} className='deaths'>
-                    <CardContent>
-                        <Typography color='textSecondary' gutterBottom >
+                    <CardContent className={theme === 'dark' ? 'darkImportant' : ''}>
+                        <Typography color='textSecondary' gutterBottom className={theme === 'dark' ? 'darkImportant' : ''}>
                             DEATHS
+                        </Typography>
+                        <Typography>
+                            <span>{new Date(today).toDateString()}</span>
                         </Typography>
                         <Typography variant='h5'>
                             <CountUp

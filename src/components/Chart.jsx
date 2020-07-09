@@ -6,17 +6,17 @@ import Cards from './Cards'
 
 function Chart(props) {
 
-    const {data} = CustomHook({ confirmed:props.country[props.country.length-1].Confirmed, recovered:props.country[props.country.length-1].Recovered, deaths:props.country[props.country.length-1].Deaths})
-    console.log(props.country)
-    console.log(data)
+    const {data} = CustomHook({ confirmed:props.country[props.country.length-2].Confirmed, recovered:props.country[props.country.length-2].Recovered, deaths:props.country[props.country.length-2].Deaths})
+
+      console.log(data)
     return (
         props.country ?
         <motion.div  initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} className='container'>
-            <Cards data={data}/>
+            <Cards data={data} country={props.country[0].Country}/>
           <Line data={{
                 labels: props.country.map(data => data.Date.slice(0, 10)),
                 datasets: [{
-                    data: props.country.map(data => data.Confirmed),
+                    data: props.country.map((data) => data.Confirmed),
                     label: 'confirmed',
                     borderColor: 'rgba(0, 0, 255, 0.5)',
                     fill: true,
